@@ -244,29 +244,6 @@ window.SITE_CONTENT = {
       "keywords": [],
       "featured": false,
       "requestable": true
-    },
-    {
-      "id": "009",
-      "slug": "test-paper",
-      "title": "Test Paper",
-      "year": 2026,
-      "authors": [
-        {
-          "given": "Wasif Islam",
-          "family": "Saad"
-        }
-      ],
-      "abstract": "",
-      "status": "prep",
-      "journal": "",
-      "abdc": "",
-      "sjr": "",
-      "submission": "",
-      "doi": "",
-      "url": "",
-      "keywords": [],
-      "featured": false,
-      "requestable": true
     }
   ]
 };
