@@ -781,7 +781,25 @@
   });
 
   /* ---------------- Start-up ---------------- */
+  /* Sessions end 30 minutes after signing in. Count down with the server's clock,
+     warn shortly before, then return to the sign-in screen (unsaved edits are kept). */
+  let sessionTimers = [];
+  function startSession(info) {
+    sessionTimers.forEach(clearTimeout);
+    sessionTimers = [];
+    if (!info || !info.expires) return;
+    const left = info.expires - (info.now || Date.now());
+    if (left > 2 * 60e3) sessionTimers.push(setTimeout(() =>
+      toast(isDirty() ? "Your session ends in 2 minutes. Save your changes now." : "Your session ends in 2 minutes."), left - 2 * 60e3));
+    sessionTimers.push(setTimeout(() => {
+      if (!$("app").hidden) showLogin(isDirty()
+        ? "Your 30-minute session has ended. Sign in again to save your changes; they have been kept."
+        : "Your 30-minute session has ended. Please sign in again.");
+    }, Math.max(0, left)));
+  }
+
   function showLogin(msg) {
+    sessionTimers.forEach(clearTimeout);
     $("app").hidden = true; $("login").hidden = false;
     $("login-err").hidden = !msg; $("login-err").textContent = msg || "";
     $("pw").value = ""; $("pw").focus();
@@ -791,7 +809,7 @@
     const btn = $("login-btn");
     btn.disabled = true; btn.textContent = "Signing in…";
     try {
-      await api("login", { method: "POST", body: { password: $("pw").value } });
+      startSession(await api("login", { method: "POST", body: { password: $("pw").value } }));
       $("login").hidden = true;
       if (draft) { $("app").hidden = false; render(); }      // session expired mid-edit: keep the draft
       else await loadServer();
@@ -846,6 +864,7 @@
     if (status.maxUpload) maxUpload = status.maxUpload;
     if (status.configError) { showLogin(status.configError); $("login-btn").disabled = true; return; }
     if (!status.authed) return showLogin();
+    startSession(status);
     try { await loadServer(); } catch (e) { showLogin(e.message); }
   })();
 })();

@@ -16,7 +16,7 @@
 const crypto = require("crypto");
 const path = require("path");
 
-const SESSION_HOURS = 12;
+const SESSION_MINUTES = 30;   // sign-in lasts this long, then the admin must sign in again
 const UPLOAD_TYPES = [".pdf", ".jpg", ".jpeg", ".png", ".webp", ".gif"];
 
 /* ---------------- Content file format ---------------- */
@@ -65,7 +65,8 @@ function makeAuth(password, secret) {
       const b = crypto.createHash("sha256").update(password).digest();
       return crypto.timingSafeEqual(a, b);
     },
-    token() { const exp = String(Date.now() + SESSION_HOURS * 3600e3); return `${exp}.${sign(exp)}`; },
+    token() { const exp = String(Date.now() + SESSION_MINUTES * 60e3); return `${exp}.${sign(exp)}`; },
+    expires(t) { return Number(String(t || "").split(".")[0]) || 0; },
     valid(t) {
       const [exp, sig] = String(t || "").split(".");
       if (!exp || !sig || Number(exp) < Date.now()) return false;
@@ -128,6 +129,7 @@ function createApi({ storage, password, secret, configError }) {
         return json(res, 200, {
           server: true, host: storage.kind, maxUpload: storage.maxUpload,
           authed: !configError && auth.valid(getCookie(req, "adm")),
+          expires: auth.valid(getCookie(req, "adm")) ? auth.expires(getCookie(req, "adm")) : 0, now: Date.now(),
           configError: configError || ""
         });
 
@@ -145,8 +147,9 @@ function createApi({ storage, password, secret, configError }) {
           return json(res, 401, { error: "Incorrect password." });
         }
         failures.delete(ip);
-        const cookie = `adm=${auth.token()}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_HOURS * 3600}${secure ? "; Secure" : ""}`;
-        return json(res, 200, { ok: true }, { "Set-Cookie": cookie });
+        const token = auth.token();
+        const cookie = `adm=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_MINUTES * 60}${secure ? "; Secure" : ""}`;
+        return json(res, 200, { ok: true, expires: auth.expires(token), now: Date.now() }, { "Set-Cookie": cookie });
       }
 
       if (route === "logout" && method === "POST")
