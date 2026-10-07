@@ -32,7 +32,7 @@ window.SITE_CONTENT = {
   },
   "home": {
     "tagline": "I study how consumers read the signals brands send, and how those signals shape trust and moral judgment. Test part added",
-    "bio": "My research sits at the intersection of consumer psychology and brand ethics. Drawing primarily on signaling theory, I examine how disclosures, credentials, and leadership conduct shape the way consumers judge a brand's character.\n\nRecent work looks at AI disclosure in advertising, transparency about data monetization, cybersecurity certification, and the role of CEO moral reputation in financial services. Most of this work uses controlled experiments to identify the mechanisms through which these signals operate.",
+    "bio": "My research sits at the intersection of consumer psychology and brand ethics. Drawing primarily on signaling theory, I examine how disclosures, credentials, and leadership conduct shape the way consumers judge a brand's character.\n\nRecent work looks at AI disclosure in advertising, transparency about data monetization, cybersecurity certification, and the role of CEO moral reputation in financial services. Most of this work uses controlled experiments to identify the mechanisms through which these signals operate. Test part added.",
     "interests": [
       "Consumer psychology",
       "Brand ethics",
