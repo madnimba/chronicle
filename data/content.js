@@ -13,7 +13,7 @@ window.SITE_CONTENT = {
     "affiliation": "North South University",
     "location": "Dhaka, Bangladesh",
     "email": "wasif.saad@northsouth.edu",
-    "photo": "",
+    "photo": "uploads/wasif-islam-saad-portrait-3-muy8ccek.png",
     "cvUrl": "",
     "links": [
       {
