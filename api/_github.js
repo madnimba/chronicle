@@ -6,6 +6,7 @@ const { serialize, parse } = require("./_lib");
 const CONTENT_PATH = "data/content.js";
 
 function githubStorage({ token, repo, branch }) {
+  token = String(token || "").trim();   // pasted tokens often carry a stray space or newline
   async function gh(path, opts = {}) {
     const res = await fetch(`https://api.github.com/repos/${repo}${path}`, {
       method: opts.method || "GET",
@@ -20,12 +21,16 @@ function githubStorage({ token, repo, branch }) {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      const e = new Error(`GitHub ${res.status}: ${data.message || "request failed"}`);
+      const writing = (opts.method || "GET") !== "GET";
+      const reason = `GitHub said: "${data.message || "request failed"}" (${res.status}, while ${writing ? "saving to" : "reading"} ${repo})`;
+      const e = new Error(reason);
       e.gh = res.status;
-      e.publicMessage = res.status === 401 || res.status === 403
-        ? "GitHub refused access. Check that GITHUB_TOKEN is valid and can write to the repository."
-        : res.status === 404 ? "Repository or file not found. Check GITHUB_REPO and GITHUB_BRANCH."
-        : "Could not reach GitHub. Please try again.";
+      e.publicMessage =
+        res.status === 401 ? `GitHub did not accept GITHUB_TOKEN; it may be mistyped, expired or revoked. ${reason}`
+        : res.status === 403 && writing ? `GITHUB_TOKEN can read but not write. Give the token "Contents: Read and write" access to ${repo}. ${reason}`
+        : res.status === 403 ? `GitHub refused access for GITHUB_TOKEN. ${reason}`
+        : res.status === 404 ? `Not found. Check that the token has access to ${repo} and that the branch "${branch}" exists. ${reason}`
+        : `Could not save to GitHub. ${reason}`;
       throw e;
     }
     return data;

@@ -45,7 +45,7 @@
     t.className = "toast" + (err ? " err" : "");
     t.textContent = msg;
     $("toasts").appendChild(t);
-    setTimeout(() => t.remove(), err ? 6000 : 3000);
+    setTimeout(() => t.remove(), err ? Math.max(6000, msg.length * 70) : 3000);
   }
   function getPath(path) {
     return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), draft);
