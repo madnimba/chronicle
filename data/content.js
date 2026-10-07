@@ -32,7 +32,7 @@ window.SITE_CONTENT = {
   },
   "home": {
     "tagline": "I study how consumers interpret firm signals and how those signals shape perceptions, decisions, and behavior.",
-    "bio": "My research sits at the intersection of consumer behavior, marketing strategy, and consumer psychology. Drawing on theories such as signaling theory, I examine how consumers interpret information about brands, products, firms, and technologies, and how these signals influence their perceptions, evaluations, and decisions.\n\nConsumer Behavior · Consumer Psychology · Branding · Marketing Communications · Digital Marketing · Consumer Decision-Making · Signaling Theory · Experimental Research",
+    "bio": "My research sits at the intersection of consumer behavior, marketing strategy, and consumer psychology. Drawing on theories such as signaling theory, I examine how consumers interpret information about brands, products, firms, and technologies, and how these signals influence their perceptions, evaluations, and decisions.",
     "interests": [
       "Consumer Psychology",
       "Branding",
