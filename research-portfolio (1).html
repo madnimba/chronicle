@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Wasif Islam Saad — Research</title>
+<style>
+  :root {
+    --paper: #FFFFFF;
+    --ink: #111111;
+    --ink-soft: #555555;
+    --rule: #DDDDDD;
+    --accent: #2F4858;
+    --review: #2F4858;
+    --prep: #8A6A2E;
+    --serif: 'Times New Roman', Times, 'Liberation Serif', 'Nimbus Roman', serif;
+    --sans: var(--serif);
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 106.25%; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { min-height: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+  header.masthead { margin-bottom: 48px; }
+  header.masthead h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.1rem;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  header.masthead .portfolio-label {
+    margin: 0 0 10px;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+  }
+  header.masthead .topics {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 40px 0; }
+
+  /* ---------- Shared: citation byline ---------- */
+  .cite { color: var(--ink-soft); font-size: 0.85rem; line-height: 1.5; }
+  .cite strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- List view ---------- */
+  ol.index { list-style: none; margin: 0; padding: 0; }
+  ol.index li { border-bottom: 1px solid var(--rule); }
+  ol.index li:first-child { border-top: 1px solid var(--rule); }
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 4px;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: padding-left 0.15s ease;
+  }
+  .row:hover, .row:focus-visible { padding-left: 12px; }
+  .row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .row .num {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    font-size: 1rem;
+    flex: none;
+    width: 1.4em;
+    padding-top: 2px;
+  }
+  .row .body { flex: 1; min-width: 0; }
+  .row .cite { display: block; margin: 0 0 6px; }
+  .row .title {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    line-height: 1.35;
+    margin: 0 0 8px;
+  }
+  .row .meta {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    align-items: center;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
+  }
+  .status.status-review .status-dot { background: var(--review); }
+  .status.status-prep .status-dot { background: var(--prep); }
+  .status.status-review { color: var(--review); }
+  .status.status-prep { color: var(--prep); }
+
+  /* ---------- Detail view ---------- */
+  .back {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    margin-bottom: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back:hover { color: var(--accent); }
+  #d-cite { margin: 0 0 8px; font-size: 0.9rem; }
+  .paper-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin: 0 0 24px;
+    max-width: 30ch;
+  }
+  .abstract {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.7;
+    max-width: 62ch;
+    margin: 0 0 36px;
+  }
+  dl.facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 24px;
+    row-gap: 14px;
+    max-width: 62ch;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  dl.facts dt { color: var(--ink-soft); }
+  dl.facts dd { margin: 0; }
+
+  .request {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    max-width: 62ch;
+  }
+  .request p {
+    margin: 0 0 14px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--paper);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .btn-outline {
+    color: var(--accent);
+    background: transparent;
+  }
+
+  .more {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    max-width: 62ch;
+  }
+  .more p {
+    margin: 0 0 14px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ---------- Request dialog ---------- */
+  [hidden] { display: none !important; }
+  dialog.request-dialog {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0;
+    width: min(460px, calc(100% - 32px));
+    color: var(--ink);
+    background: var(--paper);
+    font-family: var(--sans);
+  }
+  dialog.request-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
+  .dlg-body { padding: 28px; }
+  .dlg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 0 0 6px; }
+  .dlg-head h3 { margin: 0; font-size: 1.25rem; font-weight: 700; }
+  .dlg-close {
+    background: none; border: none; font: inherit; font-size: 1.6rem; line-height: 1;
+    cursor: pointer; color: var(--ink-soft); padding: 0 4px;
+  }
+  .dlg-close:hover { color: var(--ink); }
+  .dlg-paper { margin: 0 0 16px; font-size: 0.9rem; color: var(--ink-soft); line-height: 1.4; }
+  .dlg-intro { margin: 0 0 18px; font-size: 0.95rem; line-height: 1.55; }
+  .dlg-intro a { color: var(--accent); }
+  .field { margin: 0 0 14px; }
+  .field label { display: block; font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 4px; }
+  .field input, .field textarea {
+    width: 100%; font: inherit; font-size: 1rem; padding: 10px 12px;
+    border: 1px solid #BBBBBB; border-radius: 4px; background: var(--paper); color: var(--ink);
+  }
+  .field textarea { min-height: 88px; resize: vertical; line-height: 1.4; display: block; }
+  .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .req { color: #8A1F1F; margin-left: 2px; }
+  .opt { font-size: 0.85em; }
+  .dlg-msg { margin: 0 0 14px; font-size: 0.9rem; line-height: 1.45; }
+  .dlg-msg.error { color: #8A1F1F; }
+  .dlg-note { margin: 12px 0 0; font-size: 0.8rem; color: var(--ink-soft); line-height: 1.4; }
+  .hp { display: none; }
+  .btn:disabled { opacity: 0.6; cursor: default; }
+
+  footer { margin-top: 64px; color: var(--ink-soft); font-size: 0.85rem; line-height: 1.6; }
+  footer a { color: inherit; }
+  footer p { margin: 0 0 4px; }
+
+  #detail-view { display: none; }
+  body.show-detail #list-view { display: none; }
+  body.show-detail #detail-view { display: block; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 40px 18px 72px; }
+    header.masthead h1 { font-size: 1.7rem; }
+    .paper-title { font-size: 1.4rem; }
+    dl.facts { grid-template-columns: 1fr; row-gap: 4px; }
+    dl.facts dt { margin-top: 10px; }
+    .btn { display: block; width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Wasif Islam Saad</h1>
+    <p class="portfolio-label">Research Portfolio</p>
+    <p class="topics" id="topics"></p>
+  </header>
+
+  <hr class="rule">
+
+  <section id="list-view">
+    <ol class="index" id="paper-list"></ol>
+  </section>
+
+  <section id="detail-view">
+    <button class="back" id="back-btn" type="button">&larr; Research Portfolio</button>
+    <p class="cite" id="d-cite"></p>
+    <h2 class="paper-title" id="d-title"></h2>
+    <p class="abstract" id="d-abstract"></p>
+    <dl class="facts" id="d-facts"></dl>
+    <div class="request">
+      <p>Full manuscripts are not posted publicly. An extended abstract is available on request.</p>
+      <button class="btn btn-outline" id="d-request" type="button">Request extended abstract</button>
+    </div>
+    <div class="more">
+      <p>View my other research</p>
+      <button class="btn" id="more-btn" type="button">See all papers &rarr;</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>Contact: <a id="f-email" href="#"></a></p>
+    <p>Last updated October 2026</p>
+  </footer>
+
+</div>
+
+<dialog class="request-dialog" id="request-dialog" aria-labelledby="dlg-title">
+  <div class="dlg-body">
+    <div class="dlg-head">
+      <h3 id="dlg-title">Request extended abstract</h3>
+      <button class="dlg-close" id="dlg-close" type="button" aria-label="Close">&times;</button>
+    </div>
+    <p class="dlg-paper" id="dlg-paper"></p>
+
+    <div id="dlg-form-view">
+      <p class="dlg-intro">Please <a id="dlg-mailto" href="#">send a pre-filled email</a> (preferred), or complete the short form below.</p>
+      <form id="dlg-form">
+        <div class="field">
+          <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-mail">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-mail" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-affil">Affiliation <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-affil" name="affiliation" type="text" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="f-note">Note or message <span class="opt">(optional)</span></label>
+          <textarea id="f-note" name="message" rows="3" maxlength="1000"></textarea>
+        </div>
+        <input class="hp" id="dlg-hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        <p class="dlg-msg error" id="dlg-error" role="alert" hidden></p>
+        <button class="btn" id="dlg-send" type="submit">Send request</button>
+        <p class="dlg-note"><span class="req" aria-hidden="true">*</span> Required. Your details are used only to send you the extended abstract.</p>
+      </form>
+    </div>
+
+    <div id="dlg-done-view" hidden>
+      <p class="dlg-intro">Thank you. Your request has been sent, and you will receive a reply by email.</p>
+      <button class="btn btn-outline" id="dlg-done-close" type="button">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  /* ==================================================================
+     EDIT HERE.
+
+     CONTACT_EMAIL: used by the "Request extended abstract" button and
+     the footer. Replace the placeholder before publishing.
+
+     TOPICS: the line of research areas under "Research Portfolio" on the
+     main page. Paper pages show "Paper 1", "Paper 2"... there instead
+     (the paper's position in the list below).
+
+     Every paper uses the SAME fields:
+       id, slug, title, year, authors, abstract, status, journal, abdc, sjr,
+       submission
+
+       id, slug    your tracking number and a short fixed name. Together
+                   they form the paper's link, e.g.
+                   wasifislamsaad.com/research/#003/ai-disclosure
+                   Never change an id or slug after you have sent that
+                   link to someone. Lowercase letters and hyphens only.
+
+       authors     list of { given, family } in publication order.
+                   The citation line ("Hassan, M., Saad, W. I., ... (2026)")
+                   and the full author list (own name in bold) are both
+                   generated from this list, so write each name once.
+       status      "review"  -> Under review
+                   "prep"    -> Manuscript in preparation
+       abdc / sjr  "A*" | "A" | "B" | "C"   /   "Q1" | "Q2" | "Q3" | "Q4"
+                   (null shows an em dash)
+       submission  prep papers only, e.g. "December 2026". null for review.
+
+     The detail page always shows the same four rows:
+       Status, Journal (or Target journal, with the expected submission
+       month for papers in preparation), Ranking (ABDC and SJR), Authors.
+     ================================================================== */
+  const CONTACT_EMAIL = "wasif.saad@northsouth.edu";
+
+  /* "Request extended abstract" pop-up form.
+     Free setup, about two minutes: go to web3forms.com, enter the email
+     address that should receive the requests, and paste the access key
+     they send you below. Until then the form shows a polite message and
+     points visitors to the pre-filled email option instead. */
+  const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+  const FORM_ACCESS_KEY = "";
+  const TOPICS = ["consumer psychology", "brand ethics", "trust", "signaling theory", "AI disclosure", "transparency", "moral judgment"];
+  const ME = { given: "Wasif Islam", family: "Saad" };
+
+  const papers = [
+    {
+      id: "001",
+      slug: "ethical-leadership",
+      title: "When Ethical Leadership Shapes Brand Ethicality: The Amplifying Role of Low Brand Credibility",
+      year: 2026,
+      authors: [
+        { given: "Mahmud", family: "Hassan" },
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Shohail", family: "Ahmed" },
+        { given: "Syeda Raisa", family: "Anam" }
+      ],
+      abstract: "This study examines how ethical leadership influences consumers’ perceptions of brand ethicality, drawing on signaling theory. We propose that ethical leadership serves as a visible signal of a brand’s moral orientation, with brand credibility moderating this relationship and brand integrity and brand social responsibility serving as mediating pathways. Using a 2 × 2 between-subjects experimental design, we test the proposed framework with 278 participants. The findings show that ethical leadership positively influences brand ethicality. The results further reveal that brand credibility negatively moderates this relationship, such that ethical leadership has a stronger positive effect when brand credibility is low. In addition, brand integrity and brand social responsibility mediate the relationship between ethical leadership and brand ethicality. This study contributes to ethical leadership and ethical branding research by showing how leadership ethics shape consumer-level brand evaluations.",
+      status: "review",
+      journal: "Journal of Global Scholars of Marketing Science",
+      abdc: "B",
+      sjr: "Q1",
+      submission: null
+    },
+    {
+      id: "002",
+      slug: "innovativeness-word-of-mouth",
+      title: "From Innovativeness to Word of Mouth: The Roles of Product Usefulness, Brand Distinctiveness, and Country Image",
+      year: 2026,
+      authors: [
+        { given: "Mahmud", family: "Hassan" },
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Ishfar", family: "Quaderi" },
+        { given: "Talib", family: "Hossain" }
+      ],
+      abstract: "Product innovativeness is widely recognized as a driver of favorable consumer and market outcomes; however, limited understanding exists regarding how product innovativeness translates into consumers’ word of mouth (WOM) behavior. Drawing on signaling theory, this study examines the direct effect of product innovativeness on WOM and investigates the mediating roles of product usefulness and brand distinctiveness, alongside the moderating role of country of origin (COO) image. A 2 × 2 between-subjects experiment was conducted using 245 consumers in Bangladesh, employing product innovativeness (incremental vs. radical innovation) and COO image (high vs. low) as experimental manipulations. The findings reveal that product innovativeness positively influences WOM. Furthermore, product usefulness and brand distinctiveness significantly mediate this relationship, indicating that consumers are more likely to engage in WOM when innovative products are perceived as functionally beneficial and capable of enhancing brand differentiation. However, the COO image does not significantly moderate the relationship between product innovativeness and WOM. This study extends signaling theory by demonstrating how consumers translate innovation signals into communication behavior and contributes to the innovation and WOM literature by identifying key product- and brand-level mechanisms underlying this relationship.",
+      status: "review",
+      journal: "Asia Pacific Journal of Marketing and Logistics",
+      abdc: "A",
+      sjr: "Q1",
+      submission: null
+    },
+    {
+      id: "003",
+      slug: "ai-disclosure",
+      title: "The Moral Returns to AI Disclosure: The Roles of Transparency, Credibility, and Reputation in Shaping Perceived Brand Ethicality",
+      year: 2026,
+      authors: [
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Shadman Sakib", family: "Khan" }
+      ],
+      abstract: "Research on AI disclosure has largely emphasized its potential to weaken consumer responses to advertising. This study asks whether revealing AI involvement can nevertheless improve perceptions of the brand’s ethical character. Drawing on signaling theory, it examines how perceived transparency and credibility explain this response and how brand reputation shapes its strength. A 2 × 2 experiment involving 304 adults compared reactions to advertising campaign scenarios with and without AI disclosure across two brands with different reputations. Disclosure increased perceived brand ethicality, with transparency and credibility serving as parallel, partially mediating pathways. The estimated indirect effect through transparency was larger than that through credibility. Both brands benefited from disclosure, although the improvement was greater for the higher-reputation brand. These findings extend AI disclosure research from evaluations of advertising content to moral judgments about the organization behind it. They suggest that disclosure can serve as a positive signal of brand conduct, with its value shaped by consumers’ prior perceptions of the sender. The study offers insight into how brands can communicate AI involvement while strengthening perceptions of openness and ethical responsibility.",
+      status: "review",
+      journal: "Journal of Advertising Research",
+      abdc: "A",
+      sjr: "Q1",
+      submission: null
+    },
+    {
+      id: "006",
+      slug: "data-monetization",
+      title: "Building Brand Authenticity Through Data Monetization Disclosure",
+      year: 2026,
+      authors: [
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Sherina", family: "Idrish" },
+        { given: "Shazia", family: "Shahid" }
+      ],
+      abstract: "Consumers fund “free” digital services with their personal data, yet brands often obscure this exchange within vague, legalistic privacy policies. This study examines whether explicitly disclosing data monetization enhances perceived brand authenticity and whether this benefit depends on why the brand discloses. Drawing on the persuasion knowledge model and attribution theory, we conceptualize explicit disclosure as an act of organizational candor from which consumers infer genuine, values-driven motives. A 2 × 2 experiment involving 282 adults varied disclosure clarity (explicit versus vague) and disclosure origin (voluntary versus regulation-mandated) on the onboarding screen of a fictitious mobile application, while holding the underlying business practice constant. Explicit disclosure increased perceived brand authenticity, partly through stronger attributions of genuine motives. This indirect effect emerged under both disclosure origins but was significantly stronger when disclosure was presented as voluntary, suggesting that consumers grant greater credit for openness perceived as freely chosen. These findings identify candor about a brand’s revenue model as a communication-based antecedent of authenticity and extend sensitive-disclosure research from cost transparency to data monetization. The study positions data-practice communication as a potential source of brand value and demonstrates that the benefits of transparency depend on both what brands reveal and why consumers believe they reveal it.",
+      status: "prep",
+      journal: "Psychology & Marketing",
+      abdc: "A",
+      sjr: "Q1",
+      submission: "December 2026"
+    },
+    {
+      id: "007",
+      slug: "cybersecurity-certification",
+      title: "When More Reassurance Means Less Trust: Cybersecurity Certification, Self-Claims, and Consumer Trust",
+      year: 2026,
+      authors: [
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Shadman Sakib", family: "Khan" }
+      ],
+      abstract: "As digital transactions expand and businesses collect more personal information, cybersecurity has become a critical concern for consumers and brands. Consumers cannot readily verify how well firms protect their personal and payment data, making security communication central to trust formation. This study examines whether pairing third-party cybersecurity certification with a brand’s own security claim strengthens or undermines consumer confidence. Drawing on signaling theory and the persuasion knowledge model, we propose that promotional claims can weaken the value of independent credentials by making persuasive intent more salient. A 2 × 2 experiment involving 328 adult online consumers independently varied the presence of certification and a brand-authored security claim on a fictitious retailer’s checkout screen. Certification alone increased brand trust and purchase intention, whereas the self-claim alone produced no independent benefit. Pairing the claim with certification weakened the credential’s effect on trust and reduced its indirect influence on purchase intention through trust. Persuasion knowledge activation was highest when both elements appeared together, providing evidence consistent with, but not establishing, the proposed explanation. These findings extend signaling theory by demonstrating that a weak, unverified claim can diminish the value of a stronger, independently verified signal. They also shift cybersecurity research toward understanding how communicating readiness creates consumer value. For brands, the results suggest that presenting credible certification plainly can be more effective than reinforcing it with promotional security language.",
+      status: "prep",
+      journal: "Journal of Consumer Behaviour",
+      abdc: "A",
+      sjr: "Q1",
+      submission: "February 2027"
+    },
+    {
+      id: "008",
+      slug: "borrowed-trust",
+      title: "Borrowed Trust: The Promise and Fragility of CEO Moral Reputation in Financial Services",
+      year: 2026,
+      authors: [
+        { given: "Wasif Islam", family: "Saad" },
+        { given: "Mirza M.", family: "Ferdous" }
+      ],
+      abstract: "Trust is central to financial services, where consumers must often commit money before they can verify a provider’s reliability. This study examines whether a CEO’s moral reputation can compensate for limited institutional credibility and how that reputation shapes consumer responses to subsequent misconduct. Drawing on signaling theory and distinctions between personal and institutional sources of trust, two experiments involving 584 participants tested responses to a fictitious mobile financial services provider using hypothetical monetary allocations. Study 1 found that CEO moral reputation increased willingness to entrust money when institutional credibility was low but provided no detectable benefit when credibility was high. Perceived organizational benevolence mediated this effect, and the advantage under low credibility was strongest among financially vulnerable consumers. Study 2 revealed the fragility of this borrowed trust: following an integrity violation involving undisclosed charges, willingness to entrust money declined more sharply under high CEO moral reputation, eliminating the initial advantage. Perceived corporate hypocrisy and moral outrage mediated this greater decline. These findings extend research on leader morality to consumer financial decisions and demonstrate that personal and institutional assurances can function as substitutes. They also reveal an asymmetric downside: the moral standing that helps an unproven provider attract trust raises expectations, intensifying responses to misconduct. CEO moral reputation, therefore, offers a conditional source of reassurance whose value depends on institutional credibility and consistency between reputation and organizational conduct.",
+      status: "prep",
+      journal: "Journal of Business Research",
+      abdc: "A",
+      sjr: "Q1",
+      submission: "April 2027"
+    }
+  ];
+
+  /* ---------------- Standard structure (do not edit per paper) ------- */
+  const STATUS = {
+    review: { label: "Under review",              journalLabel: "Journal" },
+    prep:   { label: "Manuscript in preparation", journalLabel: "Target journal" }
+  };
+  const REQUIRED = ["id", "slug", "title", "year", "authors", "abstract", "status", "journal", "abdc", "sjr", "submission"];
+
+  papers.forEach((p, i) => {
+    if (papers.findIndex(q => q.id === p.id) !== i) console.warn(`Paper ${i + 1} reuses the tracking number "${p.id}"`);
+    if (papers.findIndex(q => q.slug === p.slug) !== i) console.warn(`Paper ${i + 1} reuses the slug "${p.slug}"`);
+    REQUIRED.forEach(k => { if (!(k in p)) console.warn(`Paper ${i + 1} is missing "${k}"`); });
+    if (!STATUS[p.status]) console.warn(`Paper ${i + 1} has an unknown status "${p.status}"`);
+    if (p.status === "prep" && !p.submission) console.warn(`Paper ${i + 1} is in preparation but has no submission date`);
+  });
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function initials(given) {
+    return given.trim().split(/\s+/).map(n => n[0].toUpperCase() + ".").join(" ");
+  }
+  function isMe(a) { return a.family === ME.family && a.given === ME.given; }
+  /* APA-style: Hassan, M., Saad, W. I., Ahmed, S., & Anam, S. R. (2026) */
+  function citeHTML(p) {
+    const names = p.authors.map(a => {
+      const t = esc(`${a.family}, ${initials(a.given)}`);
+      return isMe(a) ? `<strong>${t}</strong>` : t;
+    });
+    let joined;
+    if (names.length === 1) joined = names[0];
+    else if (names.length === 2) joined = `${names[0]}, &amp; ${names[1]}`;
+    else joined = `${names.slice(0, -1).join(", ")}, &amp; ${names[names.length - 1]}`;
+    return `${joined} (${esc(p.year)})`;
+  }
+  /* Full names in publication order, own name in bold */
+  function authorsHTML(p) {
+    return p.authors.map(a => {
+      const t = esc(`${a.given} ${a.family}`);
+      return isMe(a) ? `<strong>${t}</strong>` : t;
+    }).join(", ");
+  }
+
+  /* ---------------- Rendering --------------------------------------- */
+  const listEl = document.getElementById('paper-list');
+  let currentPaper = null;
+
+  function renderList() {
+    listEl.innerHTML = papers.map((p, i) => `
+      <li>
+        <button class="row" data-index="${i}" type="button">
+          <span class="num">${i + 1}.</span>
+          <span class="body">
+            <span class="cite">${citeHTML(p)}</span>
+            <span class="title">${esc(p.title)}</span>
+            <span class="meta">
+              <span class="status status-${esc(p.status)}"><span class="status-dot"></span>${esc(STATUS[p.status].label)}</span>
+              <span>${esc(p.journal)}</span>
+            </span>
+          </span>
+        </button>
+      </li>`).join('');
+
+    listEl.querySelectorAll('.row').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = papers[Number(btn.dataset.index)];
+        location.hash = `${p.id}/${p.slug}`;
+      });
+    });
+  }
+
+  function renderDetail(index) {
+    const p = papers[index];
+    if (!p) return false;
+    const s = STATUS[p.status];
+
+    document.getElementById('d-cite').innerHTML = citeHTML(p);
+    document.getElementById('d-title').textContent = p.title;
+    document.getElementById('d-abstract').textContent = p.abstract;
+
+    /* Four rows, same for every paper. Values are HTML-escaped here. */
+    const journalValue = p.status === "prep"
+      ? `${p.journal} (Expected submission: ${p.submission})`
+      : p.journal;
+    const facts = [
+      ["Status",       esc(s.label)],
+      [s.journalLabel, esc(journalValue)],
+      ["Ranking",      esc(`ABDC: ${p.abdc || "—"}; SJR: ${p.sjr || "—"}`)],
+      ["Authors",      authorsHTML(p)]
+    ];
+    document.getElementById('d-facts').innerHTML =
+      facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('');
+
+    currentPaper = p;
+    return true;
+  }
+
+  /* Link format: #001/ethical-leadership  (tracking number / name).
+     Also accepted: the number alone, the name alone, or the older
+     #paper-2 style, so a slightly mistyped link still lands on the paper. */
+  function findIndex(hash) {
+    const full = papers.findIndex(p => `${p.id}/${p.slug}` === hash);
+    if (full >= 0) return full;
+    const byId = papers.findIndex(p => p.id === hash || hash.startsWith(p.id + "/") || hash.startsWith(p.id));
+    if (byId >= 0 && /^\d+/.test(hash)) return byId;
+    const bySlug = papers.findIndex(p => p.slug === hash || hash.endsWith(p.slug));
+    if (bySlug >= 0) return bySlug;
+    const m = hash.match(/^paper-(\d+)$/);
+    return m ? Number(m[1]) - 1 : -1;
+  }
+
+  function route() {
+    const hash = decodeURIComponent(location.hash.replace('#', ''));
+    const idx = findIndex(hash);
+    const line = document.getElementById('topics');   // line under "Research Portfolio"
+    if (renderDetail(idx)) {
+      line.textContent = `Paper ${idx + 1}`;            // paper pages: serial number in the list
+      document.body.classList.add('show-detail');
+    } else {
+      line.textContent = TOPICS.join(" · ");            // main page: research topics
+      document.body.classList.remove('show-detail');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function goHome() {
+    history.pushState('', document.title, location.pathname + location.search);
+    route();
+  }
+  document.getElementById('back-btn').addEventListener('click', goHome);
+  document.getElementById('more-btn').addEventListener('click', goHome);
+  window.addEventListener('hashchange', route);
+
+  document.getElementById('more-btn').textContent = `See all ${papers.length} papers →`;
+
+  const fEmail = document.getElementById('f-email');
+  fEmail.href = 'mailto:' + CONTACT_EMAIL;
+  fEmail.textContent = CONTACT_EMAIL;
+
+  /* ---------------- Request dialog ---------------- */
+  const dlg = document.getElementById('request-dialog');
+  const formView = document.getElementById('dlg-form-view');
+  const doneView = document.getElementById('dlg-done-view');
+  const form = document.getElementById('dlg-form');
+  const errEl = document.getElementById('dlg-error');
+  const sendBtn = document.getElementById('dlg-send');
+
+  function mailParts(p) {
+    return {
+      subject: `Extended abstract request: ${p.title}`,
+      // CRLF line breaks so Outlook keeps the paragraphs
+      body: `Dear Wasif,\r\n\r\nI would like to request the extended abstract of the paper "${p.title}".\r\n\r\nName:\r\nAffiliation:\r\n\r\nThank you.`
+    };
+  }
+  function mailtoFor(p) {
+    const m = mailParts(p);
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}`;
+  }
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.hidden = false;
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send request';
+  }
+
+  function openRequest() {
+    if (!currentPaper) return;
+    if (typeof dlg.showModal !== 'function') { location.href = mailtoFor(currentPaper); return; }
+    form.reset();
+    errEl.hidden = true;
+    formView.hidden = false;
+    doneView.hidden = true;
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send request';
+    document.getElementById('dlg-paper').textContent = currentPaper.title;
+    document.getElementById('dlg-mailto').href = mailtoFor(currentPaper);
+    dlg.showModal();
+  }
+
+  function closeRequest() { if (dlg.open) dlg.close(); }
+
+  document.getElementById('d-request').addEventListener('click', openRequest);
+  document.getElementById('dlg-close').addEventListener('click', closeRequest);
+  document.getElementById('dlg-done-close').addEventListener('click', closeRequest);
+  dlg.addEventListener('click', e => { if (e.target === dlg) closeRequest(); });   // click on the dimmed backdrop
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const p = currentPaper;
+    if (!p) return;
+    errEl.hidden = true;
+    if (document.getElementById('dlg-hp').checked) return;              // spam trap
+    if (!FORM_ACCESS_KEY) {
+      showError('This form is not connected yet. Please use the pre-filled email option above.');
+      return;
+    }
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: FORM_ACCESS_KEY,
+          subject: `Extended abstract request: ${p.title}`,
+          from_name: 'Research portfolio',
+          name: document.getElementById('f-name').value.trim(),
+          email: document.getElementById('f-mail').value.trim(),
+          affiliation: document.getElementById('f-affil').value.trim(),
+          message: document.getElementById('f-note').value.trim(),
+          paper: `${p.id} · ${p.title}`
+        })
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        formView.hidden = true;
+        doneView.hidden = false;
+      } else {
+        throw new Error(json.message || 'Request failed');
+      }
+    } catch (err) {
+      showError('Sorry, the request could not be sent. Please use the pre-filled email option above.');
+    }
+  });
+
+  renderList();
+  route();
+</script>
+</body>
+</html>

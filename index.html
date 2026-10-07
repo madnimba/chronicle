@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wasif Islam Saad</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-base="">
+<header class="site-header" id="site-header"></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1 id="h-name"></h1>
+      <p class="role" id="h-role"></p>
+      <p class="lead" id="h-tagline"></p>
+    </div>
+    <img class="portrait" id="h-photo" alt="" hidden>
+  </section>
+
+  <section class="section" id="s-about">
+    <h2>About</h2>
+    <div class="content prose" id="h-bio"></div>
+  </section>
+
+  <section class="section" id="s-interests">
+    <h2>Research interests</h2>
+    <div class="content"><ul class="interests" id="h-interests"></ul></div>
+  </section>
+
+  <section class="section" id="s-research">
+    <h2>Selected research</h2>
+    <div class="content">
+      <ul class="pubs" id="h-papers"></ul>
+      <a class="more-link" href="research/" id="h-all">All research</a>
+    </div>
+  </section>
+
+  <section class="section" id="s-news">
+    <h2>News</h2>
+    <div class="content"><ul class="news" id="h-news"></ul></div>
+  </section>
+
+  <section class="section" id="s-education">
+    <h2>Education</h2>
+    <div class="content"><ul class="entries" id="h-education"></ul></div>
+  </section>
+
+  <section class="section" id="s-experience">
+    <h2>Experience</h2>
+    <div class="content"><ul class="entries" id="h-experience"></ul></div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <div class="content"><dl class="contact-list" id="h-contact"></dl></div>
+  </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script src="data/content.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  const { C, esc, safeUrl, inline, paragraphs, fullName, citeHTML, statusHTML, paperHref, renderChrome } = Site;
+  const P = C.profile || {}, H = C.home || {};
+  const $ = id => document.getElementById(id);
+  const hide = (id, empty) => { $(id).hidden = !!empty; };
+
+  renderChrome("home");
+  document.title = fullName();
+
+  $("h-name").textContent = fullName();
+  $("h-role").innerHTML = [P.title, P.affiliation].filter(Boolean).map(s => `<span>${esc(s)}</span>`).join("");
+  $("h-tagline").innerHTML = inline(H.tagline || "");
+  if (P.photo) { $("h-photo").src = Site.href(P.photo, ""); $("h-photo").alt = fullName(); $("h-photo").hidden = false; }
+
+  $("h-bio").innerHTML = paragraphs(H.bio);
+  hide("s-about", !H.bio);
+
+  const interests = H.interests || [];
+  $("h-interests").innerHTML = interests.map(t => `<li>${esc(t)}</li>`).join("");
+  hide("s-interests", !interests.length);
+
+  const papers = C.papers || [];
+  const n = Math.max(1, Number(H.featuredCount) || 3);
+  let picks = papers.filter(p => p.featured);
+  if (!picks.length) picks = papers;
+  picks = picks.slice(0, n);
+  $("h-papers").innerHTML = picks.map(p => `
+    <li>
+      <span class="cite">${citeHTML(p)}</span>
+      <a class="pub-title" href="${esc(paperHref(p, ""))}">${esc(p.title)}</a>
+      <span class="meta">${statusHTML(p)}${p.journal ? `<span class="journal">${esc(p.journal)}</span>` : ""}</span>
+    </li>`).join("");
+  $("h-all").textContent = `All research (${papers.length})`;
+  hide("s-research", !papers.length);
+
+  const news = H.news || [];
+  $("h-news").innerHTML = news.map(x => `<li><span class="n-date">${esc(x.date)}</span><span>${inline(x.text)}</span></li>`).join("");
+  hide("s-news", !news.length);
+
+  const entries = list => list.map(e => `
+    <li>
+      <span class="e-main">${inline(e.main)}</span>
+      <span class="e-when">${esc(e.when || "")}</span>
+      ${e.sub ? `<span class="e-sub">${inline(e.sub)}</span>` : ""}
+    </li>`).join("");
+  $("h-education").innerHTML = entries(H.education || []);
+  hide("s-education", !(H.education || []).length);
+  $("h-experience").innerHTML = entries(H.experience || []);
+  hide("s-experience", !(H.experience || []).length);
+
+  const rows = [];
+  if (P.email) rows.push(["Email", `<a href="mailto:${esc(P.email)}">${esc(P.email)}</a>`]);
+  const aff = [P.affiliation, P.location].filter(Boolean).join(", ");
+  if (aff) rows.push(["Affiliation", esc(aff)]);
+  const links = (P.links || []).filter(l => l.label && safeUrl(l.url));
+  if (links.length) rows.push(["Profiles", `<span class="links-inline">${links.map(l =>
+    `<a href="${esc(safeUrl(l.url))}" rel="noopener">${esc(l.label)}</a>`).join("")}</span>`]);
+  if (P.cvUrl) rows.push(["CV", `<a href="${esc(safeUrl(P.cvUrl))}">Download CV</a>`]);
+  $("h-contact").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+  hide("contact", !rows.length);
+})();
+</script>
+</body>
+</html>

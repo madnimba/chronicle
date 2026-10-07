@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Site admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Sign in -->
+<div class="login" id="login" hidden>
+  <form class="login-card" id="login-form">
+    <h1>Site admin</h1>
+    <p>Sign in to edit your website.</p>
+    <p class="login-err" id="login-err" hidden></p>
+    <div class="f">
+      <label for="pw">Password</label>
+      <input type="password" id="pw" autocomplete="current-password" required autofocus>
+    </div>
+    <button class="btn btn-primary" type="submit" id="login-btn">Sign in</button>
+  </form>
+</div>
+
+<!-- Editor -->
+<div class="shell" id="app" hidden>
+  <aside class="sidebar" id="sidebar">
+    <p class="logo">Site admin</p>
+    <p class="logo-sub" id="side-name"></p>
+    <button class="nav-btn" data-view="papers">Papers <span class="badge" id="paper-count"></span></button>
+    <button class="nav-btn" data-view="profile">Profile &amp; contact</button>
+    <button class="nav-btn" data-view="home">Home page</button>
+    <button class="nav-btn" data-view="research">Research page</button>
+    <button class="nav-btn" data-view="settings">Settings &amp; backups</button>
+    <div class="spacer"></div>
+    <a class="side-link" href="../" target="_blank" rel="noopener">View website &nearr;</a>
+    <button class="nav-btn" id="logout-btn" type="button">Sign out</button>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Menu">&#9776;</button>
+      <h2 id="view-title"></h2>
+      <span class="save-state" id="save-state">All changes saved</span>
+      <button class="btn btn-primary" id="save-btn" type="button">Save changes</button>
+    </header>
+    <div class="content">
+      <div id="mode-banner"></div>
+      <div id="view"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<input type="file" id="file-input" hidden>
+
+<script src="admin.js"></script>
+</body>
+</html>

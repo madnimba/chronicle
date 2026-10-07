@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Research — Wasif Islam Saad</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-base="../">
+<header class="site-header" id="site-header"></header>
+
+<main class="wrap">
+  <section id="list-view">
+    <header class="masthead">
+      <p class="kicker">Research</p>
+      <h1>Publications &amp; working papers</h1>
+      <p class="intro" id="r-intro"></p>
+      <p class="topics" id="r-topics"></p>
+    </header>
+    <div class="filters" id="filters" role="group" aria-label="Filter by status"></div>
+    <ol class="index" id="paper-list"></ol>
+    <p class="empty" id="empty" hidden>No papers listed yet.</p>
+  </section>
+
+  <article id="detail-view" hidden>
+    <button class="back" id="back-btn" type="button">&larr; All research</button>
+    <p class="kicker paper-kicker" id="d-kicker"></p>
+    <p class="cite" id="d-cite"></p>
+    <h1 class="paper-title" id="d-title"></h1>
+    <p class="kicker abstract-label">Abstract</p>
+    <p class="abstract" id="d-abstract"></p>
+    <dl class="facts" id="d-facts"></dl>
+    <div class="panel" id="d-request-panel">
+      <p id="d-request-note"></p>
+      <div class="actions">
+        <a class="btn" id="d-link" href="#" rel="noopener" hidden>Read the paper</a>
+        <button class="btn btn-outline" id="d-request" type="button">Request extended abstract</button>
+      </div>
+    </div>
+    <div class="panel">
+      <p>View my other research</p>
+      <button class="btn" id="more-btn" type="button">See all papers &rarr;</button>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<dialog class="request-dialog" id="request-dialog" aria-labelledby="dlg-title">
+  <div class="dlg-body">
+    <div class="dlg-head">
+      <h3 id="dlg-title">Request extended abstract</h3>
+      <button class="dlg-close" id="dlg-close" type="button" aria-label="Close">&times;</button>
+    </div>
+    <p class="dlg-paper" id="dlg-paper"></p>
+
+    <div id="dlg-form-view">
+      <p class="dlg-intro">Please <a id="dlg-mailto" href="#">send a pre-filled email</a> (preferred), or complete the short form below.</p>
+      <form id="dlg-form">
+        <div class="field">
+          <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-mail">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-mail" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-affil">Affiliation <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-affil" name="affiliation" type="text" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="f-note">Note or message <span class="opt">(optional)</span></label>
+          <textarea id="f-note" name="message" rows="3" maxlength="1000"></textarea>
+        </div>
+        <input class="hp" id="dlg-hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        <p class="dlg-msg error" id="dlg-error" role="alert" hidden></p>
+        <button class="btn" id="dlg-send" type="submit">Send request</button>
+        <p class="dlg-note"><span class="req" aria-hidden="true">*</span> Required. Your details are used only to send you the extended abstract.</p>
+      </form>
+    </div>
+
+    <div id="dlg-done-view" hidden>
+      <p class="dlg-intro">Thank you. Your request has been sent, and you will receive a reply by email.</p>
+      <button class="btn btn-outline" id="dlg-done-close" type="button">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="../data/content.js"></script>
+<script src="../assets/site.js"></script>
+<script>
+(function () {
+  const { C, STATUS, STATUS_ORDER, esc, href, fullName, citeHTML, authorsHTML, statusHTML, renderChrome } = Site;
+  const R = C.research || {};
+  const papers = C.papers || [];
+  const CONTACT_EMAIL = (C.profile || {}).email || "";
+  const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+  const FORM_ACCESS_KEY = R.formAccessKey || "";
+  const $ = id => document.getElementById(id);
+
+  renderChrome("research");
+  const baseTitle = `Research — ${fullName()}`;
+  document.title = baseTitle;
+  $("r-intro").textContent = R.intro || "";
+  $("r-intro").hidden = !R.intro;
+  $("r-topics").textContent = (R.topics || []).join(" · ");
+
+  /* ---------------- List + filters ---------------- */
+  let filter = "all";
+  function renderFilters() {
+    const present = STATUS_ORDER.filter(s => papers.some(p => p.status === s));
+    const el = $("filters");
+    if (present.length < 2) { el.hidden = true; return; }
+    const btn = (key, label, n) =>
+      `<button type="button" data-f="${key}" aria-pressed="${filter === key}">${esc(label)}<span class="count">${n}</span></button>`;
+    el.innerHTML = btn("all", "All", papers.length) +
+      present.map(s => btn(s, STATUS[s].label, papers.filter(p => p.status === s).length)).join("");
+    el.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+      filter = b.dataset.f; renderFilters(); renderList();
+    }));
+  }
+  function renderList() {
+    const items = papers.map((p, i) => ({ p, i })).filter(({ p }) => filter === "all" || p.status === filter);
+    $("paper-list").innerHTML = items.map(({ p, i }) => `
+      <li>
+        <a class="row" href="#${esc(encodeURIComponent(p.id))}/${esc(encodeURIComponent(p.slug))}">
+          <span class="num">${i + 1}.</span>
+          <span class="body">
+            <span class="cite">${citeHTML(p)}</span>
+            <span class="pub-title">${esc(p.title)}</span>
+            <span class="meta">${statusHTML(p)}${p.journal ? `<span class="journal">${esc(p.journal)}</span>` : ""}</span>
+          </span>
+        </a>
+      </li>`).join("");
+    $("empty").hidden = papers.length > 0;
+  }
+
+  /* ---------------- Detail ---------------- */
+  let currentPaper = null;
+  function renderDetail(index) {
+    const p = papers[index];
+    if (!p) return false;
+    const s = STATUS[p.status] || { label: p.status, journalLabel: "Journal" };
+
+    $("d-kicker").textContent = `Paper ${index + 1} of ${papers.length}`;
+    $("d-cite").innerHTML = citeHTML(p);
+    $("d-title").textContent = p.title;
+    $("d-abstract").textContent = p.abstract || "";
+
+    let journal = p.journal ? `<span class="journal">${esc(p.journal)}</span>` : "—";
+    if ((p.status === "prep" || p.status === "working") && p.submission)
+      journal += ` (Expected submission: ${esc(p.submission)})`;
+    const facts = [
+      ["Status", statusHTML(p)],
+      [s.journalLabel, journal]
+    ];
+    if (R.showRanking !== false && (p.abdc || p.sjr))
+      facts.push(["Ranking", esc(`ABDC: ${p.abdc || "—"}; SJR: ${p.sjr || "—"}`)]);
+    facts.push(["Authors", authorsHTML(p)]);
+    if (p.keywords && p.keywords.length) facts.push(["Keywords", esc(p.keywords.join(", "))]);
+    if (p.doi) {
+      const doi = p.doi.replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
+      facts.push(["DOI", `<a href="https://doi.org/${esc(doi)}" rel="noopener">${esc(doi)}</a>`]);
+    }
+    $("d-facts").innerHTML = facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join("");
+
+    const link = href(p.url, "../");
+    $("d-link").hidden = !link;
+    if (link) $("d-link").href = link;
+    const canRequest = p.requestable !== false && !!CONTACT_EMAIL;
+    $("d-request").hidden = !canRequest;
+    $("d-request-note").textContent = canRequest ? (R.requestNote || "") : "";
+    $("d-request-note").hidden = !canRequest || !R.requestNote;
+    $("d-request-panel").hidden = !link && !canRequest;
+
+    currentPaper = p;
+    document.title = `${p.title} — ${fullName()}`;
+    return true;
+  }
+
+  /* Link format: #001/ethical-leadership (tracking number / short name).
+     Also accepted: the number alone, the name alone, or the older #paper-2 style. */
+  function findIndex(hash) {
+    if (!hash) return -1;
+    const full = papers.findIndex(p => `${p.id}/${p.slug}` === hash);
+    if (full >= 0) return full;
+    if (/^\d+/.test(hash)) {
+      const id = hash.split("/")[0];
+      const byId = papers.findIndex(p => p.id === id);
+      if (byId >= 0) return byId;
+    }
+    const bySlug = papers.findIndex(p => p.slug === hash || hash.endsWith("/" + p.slug));
+    if (bySlug >= 0) return bySlug;
+    const m = hash.match(/^paper-(\d+)$/);
+    return m ? Number(m[1]) - 1 : -1;
+  }
+
+  function route() {
+    const hash = decodeURIComponent(location.hash.replace(/^#/, ""));
+    const idx = findIndex(hash);
+    const detail = renderDetail(idx);
+    $("detail-view").hidden = !detail;
+    $("list-view").hidden = detail;
+    if (!detail) { currentPaper = null; document.title = baseTitle; }
+    window.scrollTo(0, 0);
+  }
+  function goHome() {
+    history.pushState("", document.title, location.pathname + location.search);
+    route();
+  }
+  $("back-btn").addEventListener("click", goHome);
+  $("more-btn").addEventListener("click", goHome);
+  $("more-btn").textContent = `See all ${papers.length} papers →`;
+  window.addEventListener("hashchange", route);
+
+  /* ---------------- Request dialog ---------------- */
+  const dlg = $("request-dialog"), formView = $("dlg-form-view"), doneView = $("dlg-done-view");
+  const form = $("dlg-form"), errEl = $("dlg-error"), sendBtn = $("dlg-send");
+  const firstName = (C.profile || {}).givenName ? C.profile.givenName.split(/\s+/).pop() : "";
+
+  function mailtoFor(p) {
+    const subject = `Extended abstract request: ${p.title}`;
+    // CRLF line breaks so Outlook keeps the paragraphs
+    const body = `Dear ${firstName || fullName()},\r\n\r\nI would like to request the extended abstract of the paper "${p.title}".\r\n\r\nName:\r\nAffiliation:\r\n\r\nThank you.`;
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+  function showError(msg) {
+    errEl.textContent = msg; errEl.hidden = false;
+    sendBtn.disabled = false; sendBtn.textContent = "Send request";
+  }
+  function openRequest() {
+    if (!currentPaper) return;
+    if (typeof dlg.showModal !== "function") { location.href = mailtoFor(currentPaper); return; }
+    form.reset();
+    errEl.hidden = true; formView.hidden = false; doneView.hidden = true;
+    sendBtn.disabled = false; sendBtn.textContent = "Send request";
+    $("dlg-paper").textContent = currentPaper.title;
+    $("dlg-mailto").href = mailtoFor(currentPaper);
+    dlg.showModal();
+  }
+  function closeRequest() { if (dlg.open) dlg.close(); }
+
+  $("d-request").addEventListener("click", openRequest);
+  $("dlg-close").addEventListener("click", closeRequest);
+  $("dlg-done-close").addEventListener("click", closeRequest);
+  dlg.addEventListener("click", e => { if (e.target === dlg) closeRequest(); });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const p = currentPaper;
+    if (!p) return;
+    errEl.hidden = true;
+    if ($("dlg-hp").checked) return;                                   // spam trap
+    if (!FORM_ACCESS_KEY) {
+      showError("This form is not connected yet. Please use the pre-filled email option above.");
+      return;
+    }
+    sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          access_key: FORM_ACCESS_KEY,
+          subject: `Extended abstract request: ${p.title}`,
+          from_name: "Research portfolio",
+          name: $("f-name").value.trim(),
+          email: $("f-mail").value.trim(),
+          affiliation: $("f-affil").value.trim(),
+          message: $("f-note").value.trim(),
+          paper: `${p.id} · ${p.title}`
+        })
+      });
+      const json = await res.json();
+      if (res.ok && json.success) { formView.hidden = true; doneView.hidden = false; }
+      else throw new Error(json.message || "Request failed");
+    } catch (err) {
+      showError("Sorry, the request could not be sent. Please use the pre-filled email option above.");
+    }
+  });
+
+  renderFilters();
+  renderList();
+  route();
+})();
+</script>
+</body>
+</html>
