@@ -46,8 +46,14 @@ window.SITE_CONTENT = {
     "news": []
   },
   "research": {
-    "intro": "",
-    "topics": [],
+    "intro": "\n\n",
+    "topics": [
+      "Consumer Psychology",
+      "Branding",
+      "Marketing Communications",
+      "Digital Marketing",
+      "Consumer Decision-Making"
+    ],
     "requestNote": "Full manuscripts are not posted publicly. An extended abstract is available on request.",
     "formAccessKey": "",
     "showRanking": true
