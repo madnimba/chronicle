@@ -25,6 +25,8 @@
     "August", "September", "October", "November", "December"];
 
   let mode = "server";          // or "offline"
+  let host = "local";           // where the server saves: "local" files or "github" (Vercel)
+  let maxUpload = 15 * 1024 * 1024;
   let draft = null;             // content being edited
   let savedJSON = "";           // last saved/published version, for change tracking
   let view = "papers";
@@ -195,7 +197,7 @@
     try {
       await api("content", { method: "PUT", body: draft });
       savedJSON = JSON.stringify(draft);
-      toast("Saved. Your website is up to date.");
+      toast(host === "github" ? "Saved. Your website will update in about a minute." : "Saved. Your website is up to date.");
       return true;
     } catch (e) {
       toast(e.message, true);
@@ -307,7 +309,7 @@
     input.onchange = () => {
       const file = input.files[0];
       if (!file) return;
-      if (file.size > 15 * 1024 * 1024) { toast("That file is larger than 15 MB.", true); return; }
+      if (file.size > maxUpload) { toast(`That file is larger than ${Math.round(maxUpload / 1048576)} MB. Compress it, or upload it elsewhere and paste the link.`, true); return; }
       const reader = new FileReader();
       reader.onload = async () => {
         try {
@@ -316,7 +318,7 @@
           const r = await api("upload", { method: "POST", body: { name: file.name, data } });
           setPath(path, r.path);
           const y = scrollY; render(); scrollTo(0, y);
-          toast("Uploaded. Remember to save your changes.");
+          toast(host === "github" ? "Uploaded. Save your changes; the file goes live with the next site update." : "Uploaded. Remember to save your changes.");
         } catch (e) { toast(e.message, true); }
       };
       reader.readAsDataURL(file);
@@ -700,7 +702,9 @@
       ${mode === "server" ? `
       <div class="card">
         <h3>Backups</h3>
-        <p class="hint">A copy of the previous version is kept every time you save (the last 50). Restoring replaces the live site content.</p>
+        <p class="hint">${host === "github"
+          ? "Every save is kept in your GitHub history; the last 30 versions are listed here. Restoring replaces the live site content."
+          : "A copy of the previous version is kept every time you save (the last 50). Restoring replaces the live site content."}</p>
         <ul class="backups" id="backups"><li class="hint">Loading…</li></ul>
       </div>` : ""}
 
@@ -716,7 +720,9 @@
       ${mode === "server" ? `
       <div class="card">
         <h3>Password</h3>
-        <p class="hint">The admin password is stored in the <code>.env</code> file in the site folder (line <code>ADMIN_PASSWORD=…</code>). Edit it there and restart the server to change it.</p>
+        <p class="hint">${host === "github"
+          ? "The admin password is the <code>ADMIN_PASSWORD</code> environment variable in Vercel (Project → Settings → Environment Variables). Change it there, then redeploy."
+          : "The admin password is stored in the <code>.env</code> file in the site folder (line <code>ADMIN_PASSWORD=…</code>). Edit it there and restart the server to change it."}</p>
       </div>` : ""}`;
   }
   async function wireSettings(el) {
@@ -742,13 +748,13 @@
       let armed = "";
       const draw = () => {
         ul.innerHTML = list.length ? list.map(b => `
-          <li><span>${esc(new Date(b.time).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }))}</span>
-            <button class="btn btn-sm ${armed === b.file ? "btn-danger-solid" : ""}" type="button" data-file="${esc(b.file)}">${armed === b.file ? "Confirm restore" : "Restore"}</button></li>`).join("")
+          <li><span>${esc(new Date(b.time).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }))}${b.label ? ` <span class="hint">· ${esc(b.label)}</span>` : ""}</span>
+            <button class="btn btn-sm ${armed === b.id ? "btn-danger-solid" : ""}" type="button" data-file="${esc(b.id)}">${armed === b.id ? "Confirm restore" : "Restore"}</button></li>`).join("")
           : `<li class="hint">No backups yet. One is made each time you save.</li>`;
         ul.querySelectorAll("[data-file]").forEach(b => b.addEventListener("click", async () => {
           if (armed !== b.dataset.file) { armed = b.dataset.file; draw(); return; }
           try {
-            const obj = await api("restore", { method: "POST", body: { file: b.dataset.file } });
+            const obj = await api("restore", { method: "POST", body: { id: b.dataset.file } });
             draft = normalize(obj); savedJSON = JSON.stringify(draft);
             render(); toast("Backup restored and published.");
           } catch (e) { toast(e.message, true); }
@@ -836,6 +842,9 @@
       if (res.ok) status = await res.json();
     } catch (e) { /* no server */ }
     if (!status || !status.server) return loadOffline();
+    host = status.host || "local";
+    if (status.maxUpload) maxUpload = status.maxUpload;
+    if (status.configError) { showLogin(status.configError); $("login-btn").disabled = true; return; }
     if (!status.authed) return showLogin();
     try { await loadServer(); } catch (e) { showLogin(e.message); }
   })();

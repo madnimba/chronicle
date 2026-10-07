@@ -7,29 +7,44 @@ admin/                Admin panel
 data/content.js       ALL site content (papers, profile, home page text). Written by the admin panel.
 assets/               Shared styles and scripts for the public pages
 uploads/              Files uploaded from the admin panel (photo, CV, PDFs)
-server.js             Small server: serves the site and lets the admin panel save
-.env                  Admin password (never published)
-backups/              Automatic copy of data/content.js before every save (last 50)
+api/                  Admin panel back end (used by Vercel and by server.js)
+vercel.json           Vercel routing and headers
+server.js             Local server, for editing on your own computer
+.env                  Local admin password (never uploaded)
+backups/              Local only: copy of data/content.js before every save
 ```
 
-## Editing the site
+## Online on Vercel (edit at yourdomain.com/admin/)
 
-1. Open a terminal in this folder and run `node server.js`
-2. Open http://localhost:8080/admin/ and sign in (the password is in `.env`)
-3. Edit, then press **Save changes** (or Ctrl+S). The site updates immediately.
+When you press **Save changes**, the admin panel commits the change to your GitHub repository,
+and Vercel redeploys the site automatically (about a minute). Your GitHub history is the backup list.
 
-To change the password, edit `ADMIN_PASSWORD=` in `.env` and restart the server.
+1. **Push this folder to a GitHub repository** (private is fine).
+2. **Import it in Vercel**: Add New → Project → choose the repo → Framework Preset **Other** → Deploy.
+3. **Create a GitHub token**: GitHub → Settings → Developer settings → Personal access tokens →
+   Fine-grained tokens → Generate new token.
+   - Repository access: *Only select repositories* → this repository
+   - Permissions → Repository permissions → **Contents: Read and write**
+   - Pick an expiration (you will need to renew it when it expires)
+4. **Add environment variables** in Vercel → Project → Settings → Environment Variables:
 
-## Putting it online
+   | Name             | Value                                               |
+   |------------------|-----------------------------------------------------|
+   | `ADMIN_PASSWORD` | a long password of your choice                      |
+   | `GITHUB_TOKEN`   | the token from step 3                               |
+   | `GITHUB_REPO`    | `your-username/your-repo` (optional, auto-detected) |
 
-**Option A: a host that runs Node.js** (Render, Railway, Fly.io, a VPS…).
-Upload the whole folder, start command `node server.js`, and set the environment
-variable `ADMIN_PASSWORD`. The admin panel then works online at `yourdomain.com/admin/`.
-Use HTTPS. Note: some free hosts wipe files on redeploy, so keep a copy of
-`data/content.js` (Settings & backups → Download content.js).
+5. **Redeploy** (Deployments → ⋯ → Redeploy) so the variables take effect.
+6. Open `https://your-site/admin/` and sign in.
 
-**Option B: a static host** (GitHub Pages, Netlify, cPanel hosting…).
-Upload everything except `server.js`, `.env` and `backups/`. The public site works as is.
-To edit, run `node server.js` on your own computer, make the changes, then upload the new
-`data/content.js` (and any new files in `uploads/`). The online `/admin/` page also opens in
-an offline mode that lets you edit and download `content.js`.
+Uploads are limited to 3 MB each on Vercel. For larger PDFs, put them elsewhere (e.g. Google Drive)
+and paste the link.
+
+## Editing on your own computer
+
+1. Run `node server.js` in this folder
+2. Open http://localhost:8080/admin/ (the password is in `.env`)
+3. Save. If the site is on Vercel, then `git add . && git commit -m "Update" && git push`.
+
+If you edit both online and locally, run `git pull` before editing locally, since online
+edits are committed to GitHub.
