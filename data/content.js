@@ -9,7 +9,7 @@ window.SITE_CONTENT = {
   "profile": {
     "givenName": "Wasif Islam",
     "familyName": "Saad",
-    "title": "Researcher in Marketing",
+    "title": "Researcher in Consumer Behavior & Marketing",
     "affiliation": "North South University",
     "location": "Dhaka, Bangladesh",
     "email": "wasif.saad@northsouth.edu",
