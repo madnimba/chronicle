@@ -130,33 +130,6 @@ window.SITE_CONTENT = {
       "requestable": true
     },
     {
-      "id": "003",
-      "slug": "ai-disclosure",
-      "title": "The Moral Returns to AI Disclosure: The Roles of Transparency, Credibility, and Reputation in Shaping Perceived Brand Ethicality",
-      "year": 2026,
-      "authors": [
-        {
-          "given": "Wasif Islam",
-          "family": "Saad"
-        },
-        {
-          "given": "Shadman Sakib",
-          "family": "Khan"
-        }
-      ],
-      "abstract": "Research on AI disclosure has largely emphasized its potential to weaken consumer responses to advertising. This study asks whether revealing AI involvement can nevertheless improve perceptions of the brand’s ethical character. Drawing on signaling theory, it examines how perceived transparency and credibility explain this response and how brand reputation shapes its strength. A 2 × 2 experiment involving 304 adults compared reactions to advertising campaign scenarios with and without AI disclosure across two brands with different reputations. Disclosure increased perceived brand ethicality, with transparency and credibility serving as parallel, partially mediating pathways. The estimated indirect effect through transparency was larger than that through credibility. Both brands benefited from disclosure, although the improvement was greater for the higher-reputation brand. These findings extend AI disclosure research from evaluations of advertising content to moral judgments about the organization behind it. They suggest that disclosure can serve as a positive signal of brand conduct, with its value shaped by consumers’ prior perceptions of the sender. The study offers insight into how brands can communicate AI involvement while strengthening perceptions of openness and ethical responsibility.",
-      "status": "review",
-      "journal": "Journal of Advertising Research",
-      "abdc": "A",
-      "sjr": "Q1",
-      "submission": "",
-      "doi": "",
-      "url": "",
-      "keywords": [],
-      "featured": true,
-      "requestable": true
-    },
-    {
       "id": "006",
       "slug": "data-monetization",
       "title": "Building Brand Authenticity Through Data Monetization Disclosure",
@@ -181,6 +154,33 @@ window.SITE_CONTENT = {
       "abdc": "A",
       "sjr": "Q1",
       "submission": "December 2026",
+      "doi": "",
+      "url": "",
+      "keywords": [],
+      "featured": true,
+      "requestable": true
+    },
+    {
+      "id": "003",
+      "slug": "ai-disclosure",
+      "title": "The Moral Returns to AI Disclosure: The Roles of Transparency, Credibility, and Reputation in Shaping Perceived Brand Ethicality",
+      "year": 2026,
+      "authors": [
+        {
+          "given": "Wasif Islam",
+          "family": "Saad"
+        },
+        {
+          "given": "Shadman Sakib",
+          "family": "Khan"
+        }
+      ],
+      "abstract": "Research on AI disclosure has largely emphasized its potential to weaken consumer responses to advertising. This study asks whether revealing AI involvement can nevertheless improve perceptions of the brand’s ethical character. Drawing on signaling theory, it examines how perceived transparency and credibility explain this response and how brand reputation shapes its strength. A 2 × 2 experiment involving 304 adults compared reactions to advertising campaign scenarios with and without AI disclosure across two brands with different reputations. Disclosure increased perceived brand ethicality, with transparency and credibility serving as parallel, partially mediating pathways. The estimated indirect effect through transparency was larger than that through credibility. Both brands benefited from disclosure, although the improvement was greater for the higher-reputation brand. These findings extend AI disclosure research from evaluations of advertising content to moral judgments about the organization behind it. They suggest that disclosure can serve as a positive signal of brand conduct, with its value shaped by consumers’ prior perceptions of the sender. The study offers insight into how brands can communicate AI involvement while strengthening perceptions of openness and ethical responsibility.",
+      "status": "prep",
+      "journal": "Psychology & Marketing",
+      "abdc": "A",
+      "sjr": "Q1",
+      "submission": "",
       "doi": "",
       "url": "",
       "keywords": [],
