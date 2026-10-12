@@ -207,7 +207,7 @@ window.SITE_CONTENT = {
       "journal": "Journal of Consumer Behaviour",
       "abdc": "A",
       "sjr": "Q1",
-      "submission": "February 2027",
+      "submission": "",
       "doi": "",
       "url": "",
       "keywords": [],
