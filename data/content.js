@@ -234,7 +234,7 @@ window.SITE_CONTENT = {
       "journal": "Journal of Business Research",
       "abdc": "A",
       "sjr": "Q1",
-      "submission": "April 2027",
+      "submission": "",
       "doi": "",
       "url": "",
       "keywords": [],
