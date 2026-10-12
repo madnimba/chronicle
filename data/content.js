@@ -132,7 +132,7 @@ window.SITE_CONTENT = {
     {
       "id": "006",
       "slug": "data-monetization",
-      "title": "Building Brand Authenticity Through Data Monetization Disclosure",
+      "title": "Credit for Candor: How Voluntary Disclosure of Data Monetization Builds Brand Authenticity",
       "year": 2026,
       "authors": [
         {
