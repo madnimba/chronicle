@@ -97,7 +97,7 @@ window.SITE_CONTENT = {
     {
       "id": "002",
       "slug": "innovativeness-word-of-mouth",
-      "title": "From Innovativeness to Word of Mouth: The Roles of Product Usefulness, Brand Distinctiveness, and Country Image",
+      "title": "Innovation to word of mouth: The roles of product usefulness, brand distinctiveness, and country image.",
       "year": 2026,
       "authors": [
         {
