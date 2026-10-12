@@ -163,7 +163,7 @@ window.SITE_CONTENT = {
     {
       "id": "003",
       "slug": "ai-disclosure",
-      "title": "The Moral Returns to AI Disclosure: The Roles of Transparency, Credibility, and Reputation in Shaping Perceived Brand Ethicality",
+      "title": "The Ethical Value of AI Disclosure: How Transparency, Credibility, and Brand Reputation Shape Consumer Judgments",
       "year": 2026,
       "authors": [
         {
