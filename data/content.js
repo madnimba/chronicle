@@ -176,8 +176,8 @@ window.SITE_CONTENT = {
         }
       ],
       "abstract": "Consumers fund “free” digital services with their personal data, yet brands often obscure this exchange within vague, legalistic privacy policies. This study examines whether explicitly disclosing data monetization enhances perceived brand authenticity and whether this benefit depends on why the brand discloses. Drawing on the persuasion knowledge model and attribution theory, we conceptualize explicit disclosure as an act of organizational candor from which consumers infer genuine, values-driven motives. A 2 × 2 experiment involving 282 adults varied disclosure clarity (explicit versus vague) and disclosure origin (voluntary versus regulation-mandated) on the onboarding screen of a fictitious mobile application, while holding the underlying business practice constant. Explicit disclosure increased perceived brand authenticity, partly through stronger attributions of genuine motives. This indirect effect emerged under both disclosure origins but was significantly stronger when disclosure was presented as voluntary, suggesting that consumers grant greater credit for openness perceived as freely chosen. These findings identify candor about a brand’s revenue model as a communication-based antecedent of authenticity and extend sensitive-disclosure research from cost transparency to data monetization. The study positions data-practice communication as a potential source of brand value and demonstrates that the benefits of transparency depend on both what brands reveal and why consumers believe they reveal it.",
-      "status": "review",
-      "journal": "Journal of Advertising Research",
+      "status": "prep",
+      "journal": "Psychology & Marketing",
       "abdc": "A",
       "sjr": "Q1",
       "submission": "December 2026",
