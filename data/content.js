@@ -62,7 +62,7 @@ window.SITE_CONTENT = {
     {
       "id": "001",
       "slug": "ethical-leadership",
-      "title": "When Ethical Leadership Shapes Brand Ethicality: The Amplifying Role of Low Brand Credibility",
+      "title": "When Credibility Is Low, Leadership Matters More: Ethical Leadership and Perceived Brand Ethicality",
       "year": 2026,
       "authors": [
         {
