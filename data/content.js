@@ -190,7 +190,7 @@ window.SITE_CONTENT = {
     {
       "id": "007",
       "slug": "cybersecurity-certification",
-      "title": "When More Reassurance Means Less Trust: Cybersecurity Certification, Self-Claims, and Consumer Trust",
+      "title": "When More Reassurance Means Less Trust: Cybersecurity Certification, Self-Claims, and  Purchase Intention",
       "year": 2026,
       "authors": [
         {
