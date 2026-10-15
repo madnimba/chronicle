@@ -188,29 +188,6 @@ window.SITE_CONTENT = {
       "requestable": true
     },
     {
-      "id": "007",
-      "slug": "cybersecurity-certification",
-      "title": "When More Reassurance Means Less Trust: Cybersecurity Certification, Self-Claims, and  Purchase Intention",
-      "year": 2026,
-      "authors": [
-        {
-          "given": "Wasif Islam",
-          "family": "Saad"
-        }
-      ],
-      "abstract": "As digital transactions expand and businesses collect more personal information, cybersecurity has become a critical concern for consumers and brands. Consumers cannot readily verify how well firms protect their personal and payment data, making security communication central to trust formation. This study examines whether pairing third-party cybersecurity certification with a brand’s own security claim strengthens or undermines consumer confidence. Drawing on signaling theory and the persuasion knowledge model, we propose that promotional claims can weaken the value of independent credentials by making persuasive intent more salient. A 2 × 2 experiment involving online consumers independently varied the presence of certification and a brand-authored security claim on a fictitious retailer’s checkout screen. Certification alone increased brand trust and purchase intention, whereas the self-claim alone produced no independent benefit. Pairing the claim with certification weakened the credential’s effect on trust and reduced its indirect influence on purchase intention through trust. Persuasion knowledge activation was highest when both elements appeared together, providing evidence consistent with, but not establishing, the proposed explanation. These findings extend signaling theory by demonstrating that a weak, unverified claim can diminish the value of a stronger, independently verified signal. They also shift cybersecurity research toward understanding how communicating readiness creates consumer value. For brands, the results suggest that presenting credible certification plainly can be more effective than reinforcing it with promotional security language.",
-      "status": "prep",
-      "journal": "Journal of Consumer Behaviour",
-      "abdc": "A",
-      "sjr": "Q1",
-      "submission": "",
-      "doi": "",
-      "url": "",
-      "keywords": [],
-      "featured": false,
-      "requestable": true
-    },
-    {
       "id": "008",
       "slug": "borrowed-trust",
       "title": "Borrowed Trust: The Promise and Fragility of CEO Moral Reputation in Financial Services",
@@ -228,6 +205,29 @@ window.SITE_CONTENT = {
       "abstract": "Trust is central to financial services, where consumers must often commit money before they can verify a provider’s reliability. This study examines whether a CEO’s moral reputation can compensate for limited institutional credibility and how that reputation shapes consumer responses to subsequent misconduct. Drawing on signaling theory and distinctions between personal and institutional sources of trust, two experiments tested responses to a fictitious mobile financial services provider using hypothetical monetary allocations. Study 1 found that CEO moral reputation increased willingness to entrust money when institutional credibility was low but provided no detectable benefit when credibility was high. Perceived organizational benevolence mediated this effect, and the advantage under low credibility was strongest among financially vulnerable consumers. Study 2 revealed the fragility of this borrowed trust: following an integrity violation involving undisclosed charges, willingness to entrust money declined more sharply under high CEO moral reputation, eliminating the initial advantage. Perceived corporate hypocrisy and moral outrage mediated this greater decline. These findings extend research on leader morality to consumer financial decisions and demonstrate that personal and institutional assurances can function as substitutes. They also reveal an asymmetric downside: the moral standing that helps an unproven provider attract trust raises expectations, intensifying responses to misconduct. CEO moral reputation, therefore, offers a conditional source of reassurance whose value depends on institutional credibility and consistency between reputation and organizational conduct.",
       "status": "prep",
       "journal": "Journal of Business Research",
+      "abdc": "A",
+      "sjr": "Q1",
+      "submission": "",
+      "doi": "",
+      "url": "",
+      "keywords": [],
+      "featured": false,
+      "requestable": true
+    },
+    {
+      "id": "007",
+      "slug": "cybersecurity-certification",
+      "title": "When More Reassurance Means Less Trust: Cybersecurity Certification, Self-Claims, and  Purchase Intention",
+      "year": 2026,
+      "authors": [
+        {
+          "given": "Wasif Islam",
+          "family": "Saad"
+        }
+      ],
+      "abstract": "As digital transactions expand and businesses collect more personal information, cybersecurity has become a critical concern for consumers and brands. Consumers cannot readily verify how well firms protect their personal and payment data, making security communication central to trust formation. This study examines whether pairing third-party cybersecurity certification with a brand’s own security claim strengthens or undermines consumer confidence. Drawing on signaling theory and the persuasion knowledge model, we propose that promotional claims can weaken the value of independent credentials by making persuasive intent more salient. A 2 × 2 experiment involving online consumers independently varied the presence of certification and a brand-authored security claim on a fictitious retailer’s checkout screen. Certification alone increased brand trust and purchase intention, whereas the self-claim alone produced no independent benefit. Pairing the claim with certification weakened the credential’s effect on trust and reduced its indirect influence on purchase intention through trust. Persuasion knowledge activation was highest when both elements appeared together, providing evidence consistent with, but not establishing, the proposed explanation. These findings extend signaling theory by demonstrating that a weak, unverified claim can diminish the value of a stronger, independently verified signal. They also shift cybersecurity research toward understanding how communicating readiness creates consumer value. For brands, the results suggest that presenting credible certification plainly can be more effective than reinforcing it with promotional security language.",
+      "status": "prep",
+      "journal": "Journal of Consumer Behaviour",
       "abdc": "A",
       "sjr": "Q1",
       "submission": "",
